@@ -2,11 +2,11 @@ use std::collections::HashSet;
 
 fn main() {
     let input = include_str!("../input_1.txt");
-    let output = part2(input);
+    let output = part1(input);
     println!("Ouput is:\n{}", output);
 }
 
-fn part2(input: &str) -> String {
+fn part1(input: &str) -> String {
     let mut total: i32 = 0;
 
     for line in input.lines() {
