@@ -8,25 +8,17 @@ fn main() {
 fn part1(input: &str) -> String {
     let mut total: i32 = 0;
     for line in input.lines() {
-        let game_id: i32;
-        let mut possible: bool = true;
         let content: &str;
         let mut map_amounts: HashMap<&str, i32> = HashMap::new();
-        map_amounts.insert("red", 12);
-        map_amounts.insert("green", 13);
-        map_amounts.insert("blue", 14);
+        map_amounts.insert("red", 0);
+        map_amounts.insert("green", 0);
+        map_amounts.insert("blue", 0);
 
         match line.split_once(": ") {
-            Some((g, c)) => {
-                if let Some((_, id)) = g.split_once(" ") {
-                    game_id = id.parse().unwrap();
-                } else {
-                    game_id = 0;
-                }
+            Some((_, c)) => {
                 content = c;
             }
             None => {
-                game_id = 0;
                 content = "no content";
             }
         }
@@ -37,14 +29,17 @@ fn part1(input: &str) -> String {
                     let amount = map_amounts.get(key).unwrap();
                     let num_int: i32 = num.parse().unwrap();
                     if num_int > *amount {
-                        possible = false;
+                        map_amounts.insert(key, num_int);
                     }
                 }
             }
         }
-        if possible {
-            total += game_id;
+
+        let mut result: i32 = 1;
+        for val in map_amounts.values() {
+            result *= val;
         }
+        total += result;
     }
 
     return total.to_string();
