@@ -87,7 +87,7 @@ fn travel_path(
     0
 }
 
-fn calc(start: (i32, i32), from: Direction,mut grid: Vec<Vec<char>>) -> usize {
+fn calc(start: (i32, i32), from: Direction, mut grid: Vec<Vec<char>>) -> usize {
     let mut visited = HashSet::new();
 
     travel_path(&grid, &mut visited, from, start);
@@ -103,7 +103,7 @@ fn calc(start: (i32, i32), from: Direction,mut grid: Vec<Vec<char>>) -> usize {
 }
 
 fn solution(input: &str) -> usize {
-    let  grid = input
+    let grid = input
         .lines()
         .map(|line| line.chars().collect::<Vec<char>>())
         .collect::<Vec<Vec<char>>>();
@@ -135,7 +135,11 @@ fn solution(input: &str) -> usize {
 
     // Right edge
     for y in 0..grid.len() {
-        let res = calc((grid[0].len() as i32, y as i32), Direction::Right, grid.clone());
+        let res = calc(
+            (grid[0].len() as i32, y as i32),
+            Direction::Right,
+            grid.clone(),
+        );
         if res > max {
             max = res;
         }
