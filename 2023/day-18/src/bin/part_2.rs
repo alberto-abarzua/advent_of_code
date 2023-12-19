@@ -46,10 +46,10 @@ fn solution(input: &str) -> i64 {
         vertices.push(cur_point.clone());
     }
 
-    let i = get_area(&vertices) as i64;
+    let a = get_area(&vertices) as i64;
     let b = num_border_points as i64;
 
-    i + b / 2 + 1
+    a + b / 2 + 1
 }
 
 fn get_area(vertices: &Vec<(i32, i32)>) -> f64 {
