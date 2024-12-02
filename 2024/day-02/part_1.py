@@ -1,9 +1,26 @@
 import sys
+from pathlib import Path
 
 
 def main(input: str):
-    print("Running main function", input)
-    return 0
+    reports = [x.split(' ') for x in input.splitlines()]
+    reports = [list(map(int, l)) for l in reports]
+
+    total = 0
+    for report in reports:
+        diff_sign = report[1] - report[0] > 0
+        safe = True
+        for i in range(1, len(report)):
+            dif = report[i] - report[i-1]
+            
+            if ((dif > 0) != diff_sign) or (abs(dif) < 1 or abs(dif) > 3):
+                safe = False
+                break
+
+        if safe:
+            total += 1
+
+    print(total)
 
 
 def readFile(filename):

@@ -1,4 +1,5 @@
 
+from pathlib import Path
 import sys
 
 
@@ -14,7 +15,16 @@ def readFile(filename):
 
 if __name__ == '__main__':
     runSample = False
+    CWD = Path(__file__).parent
     if (len(sys.argv) >= 2):
         runSample = sys.argv[1]
 
-    print("Usage: python main.py <runSample>")
+    # files are ./sample.txt and ./input.txt
+    sample = readFile(CWD / 'sample.txt')
+    input = readFile(CWD / 'input.txt')
+    if runSample:
+        print("Running sample")
+        main(sample)
+    else:
+        print("Running input")
+        main(input)
