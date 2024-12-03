@@ -1,10 +1,19 @@
 import sys
+import re
 from pathlib import Path
 
 
+def extractMuls(string: str):
+    # searchres the string for substrings in this form 'mul(NUMBER,NUMBER)'
+    # returns a list of tuples with the two numbers
+    return re.findall(r'mul\((\d+),(\d+)\)', string)
+
+
 def main(input: str):
-    print("Running main function", input)
-    return 0
+    muls = extractMuls(input)
+    print(muls)
+    res =sum([int(a) * int(b) for a, b in muls])
+    print(res)
 
 
 def readFile(filename):

@@ -1,10 +1,24 @@
 import sys
+import re
 from pathlib import Path
 
 
+def extractMuls(string: str):
+    return re.findall(r'mul\((\d+),(\d+)\)', string)
+
+
+def replaceBlocks(string: str):
+    return re.sub(r"don't\(\).*?(do\(\)|$)", "", string, flags=re.DOTALL)
+
+
 def main(input: str):
-    print("Running main function", input)
-    return 0
+
+    new_input = replaceBlocks(input)
+    print(new_input)
+    muls = extractMuls(new_input)
+    print(muls)
+    res = sum([int(a) * int(b) for a, b in muls])
+    print(res)
 
 
 def readFile(filename):
