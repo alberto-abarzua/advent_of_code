@@ -114,7 +114,6 @@ if __name__ == '__main__':
     runSample = False
     CWD = Path(__file__).parent
 
-    # Parse command line arguments
     if (len(sys.argv) >= 2):
         runSample = sys.argv[1]
 

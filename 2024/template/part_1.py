@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import timeit
 
 
 def main(input: str):
@@ -15,15 +16,24 @@ def readFile(filename):
 if __name__ == '__main__':
     runSample = False
     CWD = Path(__file__).parent
+
     if (len(sys.argv) >= 2):
         runSample = sys.argv[1]
 
     # files are ./sample.txt and ./input.txt
     sample = readFile(CWD / 'sample.txt')
     input = readFile(CWD / 'input.txt')
+
     if runSample:
         print("Running sample")
-        main(sample)
+        start_time = timeit.default_timer()
+        result = main(sample)
+        end_time = timeit.default_timer()
+        print(f"Sample execution time: {end_time - start_time:.4f} seconds")
     else:
         print("Running input")
-        main(input)
+        # Time the execution
+        start_time = timeit.default_timer()
+        result = main(input)
+        end_time = timeit.default_timer()
+        print(f"Input execution time: {end_time - start_time:.4f} seconds")
