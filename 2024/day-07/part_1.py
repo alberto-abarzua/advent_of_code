@@ -5,7 +5,6 @@ import timeit
 operators = {
     '*': lambda x, y: x * y,
     '+': lambda x, y: x + y,
-    '||': lambda x, y: int(str(x) + str(y))
 }
 
 

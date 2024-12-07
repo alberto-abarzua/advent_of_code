@@ -1,11 +1,36 @@
-import timeit
-from pathlib import Path
 import sys
+from pathlib import Path
+import timeit
+
+operators = {
+    '*': lambda x, y: x * y,
+    '+': lambda x, y: x + y,
+    '||': lambda x, y: int(str(x) + str(y))
+}
+
+
+def check_equation(result, values, acc):
+    if acc > result:
+        return False
+
+    if len(values) == 0:
+        return result == acc
+    for op in operators:
+        new_acc = operators[op](acc, values[0])
+        if check_equation(result, values[1:], new_acc):
+            return True
+
+    return False
 
 
 def main(input: str):
-    print("Running main function", input)
-    return 0
+    equations = [(result, values) for result, values in [line.split(": ") for line in input.splitlines()]]
+    equations = [(int(result), [int(value) for value in values.split(" ")]) for result, values in equations]
+    total = 0
+    for result, values in equations:
+        if check_equation(result, values[1:], values[0]):
+            total += result
+    print(total)
 
 
 def readFile(filename):
