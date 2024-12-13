@@ -8,9 +8,6 @@ def main(input: str):
     return 0
 
 
-def readFile(filename):
-    with open(filename, 'r') as f:
-        return f.read()
 
 
 if __name__ == '__main__':
@@ -19,6 +16,10 @@ if __name__ == '__main__':
 
     if (len(sys.argv) >= 2):
         runSample = sys.argv[1]
+
+    def readFile(filename):
+        with open(filename, 'r') as f:
+            return f.read()
 
     # files are ./sample.txt and ./input.txt
     sample = readFile(CWD / 'sample.txt')
